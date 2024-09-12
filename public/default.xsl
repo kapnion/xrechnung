@@ -15,13 +15,70 @@
             <head>
                 <title>Rechnung</title>
                 <style>
-                    body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-                    h1, h2 { color: #2c3e50; }
-                    table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
-                    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-                    th { background-color: #f2f2f2; }
-                    .section { margin-bottom: 30px; }
-                    .attachment { margin-top: 10px; }
+                    body {
+                        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                        line-height: 1.6;
+                        color: #333;
+                        margin: 0;
+                        padding: 0;
+                        background-color: #f9f9f9;
+                    }
+                    h1, h2 {
+                        color: #0078d4;
+                        margin: 0 0 15px;
+                    }
+                    h1 {
+                        font-size: 24px;
+                        border-bottom: 2px solid #0078d4;
+                        padding-bottom: 10px;
+                    }
+                    h2 {
+                        font-size: 20px;
+                        border-bottom: 1px solid #e1e1e1;
+                        padding-bottom: 8px;
+                        margin-bottom: 15px;
+                    }
+                    table {
+                        border-collapse: collapse;
+                        width: 100%;
+                        margin-bottom: 20px;
+                        background-color: #fff;
+                        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+                    }
+                    th, td {
+                        border: 1px solid #ddd;
+                        padding: 10px;
+                        text-align: left;
+                    }
+                    th {
+                        background-color: #f4f4f4;
+                        color: #333;
+                        font-weight: bold;
+                    }
+                    td {
+                        color: #666;
+                    }
+                    .section {
+                        margin: 20px auto;
+                        max-width: 960px;
+                        padding: 20px;
+                        background-color: #fff;
+                        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                    }
+                    .attachment {
+                        margin-top: 20px;
+                        padding: 10px;
+                        background-color: #f9f9f9;
+                        border: 1px solid #ddd;
+                        border-radius: 5px;
+                    }
+                    .attachment h3 {
+                        margin: 0 0 10px;
+                    }
+                    .attachment p {
+                        margin: 5px 0;
+                        color: #333;
+                    }
                 </style>
             </head>
             <body>
@@ -88,93 +145,107 @@
     <!-- UBL Invoice Templates -->
     <xsl:template match="ubl:Invoice">
         <!-- Basic Information -->
-        <h2>Grundinformation</h2>
-        <table>
-            <tr><th>Customization ID</th><td><xsl:value-of select="cbc:CustomizationID" /></td></tr>
-            <tr><th>Profile ID</th><td><xsl:value-of select="cbc:ProfileID" /></td></tr>
-            <tr><th>Rechnungsnummer</th><td><xsl:value-of select="cbc:ID" /></td></tr>
-            <tr><th>Ausstellungsdatum</th><td><xsl:value-of select="cbc:IssueDate" /></td></tr>
-            <tr><th>Rechnungstypcode</th><td><xsl:value-of select="cbc:InvoiceTypeCode" /></td></tr>
-            <tr><th>Währungscode</th><td><xsl:value-of select="cbc:DocumentCurrencyCode" /></td></tr>
-            <tr><th>Käuferreferenz</th><td><xsl:value-of select="cbc:BuyerReference" /></td></tr>
-        </table>
+        <div class="section">
+            <h2>Grundinformation</h2>
+            <table>
+                <tr><th>Customization ID</th><td><xsl:value-of select="cbc:CustomizationID" /></td></tr>
+                <tr><th>Profile ID</th><td><xsl:value-of select="cbc:ProfileID" /></td></tr>
+                <tr><th>Rechnungsnummer</th><td><xsl:value-of select="cbc:ID" /></td></tr>
+                <tr><th>Ausstellungsdatum</th><td><xsl:value-of select="cbc:IssueDate" /></td></tr>
+                <tr><th>Rechnungstypcode</th><td><xsl:value-of select="cbc:InvoiceTypeCode" /></td></tr>
+                <tr><th>Währungscode</th><td><xsl:value-of select="cbc:DocumentCurrencyCode" /></td></tr>
+                <tr><th>Käuferreferenz</th><td><xsl:value-of select="cbc:BuyerReference" /></td></tr>
+            </table>
+        </div>
 
         <!-- Supplier Information -->
-        <h2>Informationen zum Lieferanten</h2>
-        <table>
-            <tr><th>Lieferant E-Mail</th><td><xsl:value-of select="cac:AccountingSupplierParty/cac:Party/cbc:EndpointID" /></td></tr>
-            <tr><th>Lieferant Name</th><td><xsl:value-of select="cac:AccountingSupplierParty/cac:Party/cac:PartyName/cbc:Name" /></td></tr>
-            <tr><th>Lieferant Adresse</th><td>
-                <xsl:value-of select="cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:StreetName" />,
-                <xsl:value-of select="cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:CityName" />,
-                <xsl:value-of select="cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:PostalZone" />,
-                <xsl:value-of select="cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode" />
-            </td></tr>
-            <tr><th>Lieferant Steuer-ID</th><td><xsl:value-of select="cac:AccountingSupplierParty/cac:Party/cac:PartyTaxScheme/cbc:CompanyID" /></td></tr>
-        </table>
+        <div class="section">
+            <h2>Informationen zum Lieferanten</h2>
+            <table>
+                <tr><th>Lieferant E-Mail</th><td><xsl:value-of select="cac:AccountingSupplierParty/cac:Party/cbc:EndpointID" /></td></tr>
+                <tr><th>Lieferant Name</th><td><xsl:value-of select="cac:AccountingSupplierParty/cac:Party/cac:PartyName/cbc:Name" /></td></tr>
+                <tr><th>Lieferant Adresse</th><td>
+                    <xsl:value-of select="cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:StreetName" />,
+                    <xsl:value-of select="cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:CityName" />,
+                    <xsl:value-of select="cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cbc:PostalZone" />,
+                    <xsl:value-of select="cac:AccountingSupplierParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode" />
+                </td></tr>
+                <tr><th>Lieferant Steuer-ID</th><td><xsl:value-of select="cac:AccountingSupplierParty/cac:Party/cac:PartyTaxScheme/cbc:CompanyID" /></td></tr>
+            </table>
+        </div>
 
         <!-- Customer Information -->
-        <h2>Informationen zum Kunden</h2>
-        <table>
-            <tr><th>Kunde E-Mail</th><td><xsl:value-of select="cac:AccountingCustomerParty/cac:Party/cbc:EndpointID" /></td></tr>
-            <tr><th>Kunde Name</th><td><xsl:value-of select="cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationName" /></td></tr>
-            <tr><th>Kunde Adresse</th><td>
-                <xsl:value-of select="cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:StreetName" />,
-                <xsl:value-of select="cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:CityName" />,
-                <xsl:value-of select="cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:PostalZone" />,
-                <xsl:value-of select="cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode" />
-            </td></tr>
-        </table>
+        <div class="section">
+            <h2>Informationen zum Kunden</h2>
+            <table>
+                <tr><th>Kunde E-Mail</th><td><xsl:value-of select="cac:AccountingCustomerParty/cac:Party/cbc:EndpointID" /></td></tr>
+                <tr><th>Kunde Name</th><td><xsl:value-of select="cac:AccountingCustomerParty/cac:Party/cac:PartyLegalEntity/cbc:RegistrationName" /></td></tr>
+                <tr><th>Kunde Adresse</th><td>
+                    <xsl:value-of select="cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:StreetName" />,
+                    <xsl:value-of select="cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:CityName" />,
+                    <xsl:value-of select="cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cbc:PostalZone" />,
+                    <xsl:value-of select="cac:AccountingCustomerParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode" />
+                </td></tr>
+            </table>
+        </div>
 
         <!-- Invoice Lines -->
-        <h2>Rechnungszeilen</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Beschreibung</th>
-                    <th>Menge</th>
-                    <th>Preis</th>
-                    <th>Positionsbetrag</th>
-                </tr>
-            </thead>
-            <tbody>
-                <xsl:for-each select="cac:InvoiceLine">
+        <div class="section">
+            <h2>Rechnungszeilen</h2>
+            <table>
+                <thead>
                     <tr>
-                        <td><xsl:value-of select="cbc:ID" /></td>
-                        <td><xsl:value-of select="cac:Item/cbc:Description" /></td>
-                        <td><xsl:value-of select="cbc:InvoicedQuantity" /> <xsl:value-of select="cbc:InvoicedQuantity/@unitCode" /></td>
-                        <td><xsl:value-of select="cac:Price/cbc:PriceAmount" /> <xsl:value-of select="cac:Price/cbc:PriceAmount/@currencyID" /></td>
-                        <td><xsl:value-of select="cbc:LineExtensionAmount" /> <xsl:value-of select="cbc:LineExtensionAmount/@currencyID" /></td>
+                        <th>ID</th>
+                        <th>Beschreibung</th>
+                        <th>Menge</th>
+                        <th>Preis</th>
+                        <th>Positionsbetrag</th>
                     </tr>
-                </xsl:for-each>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <xsl:for-each select="cac:InvoiceLine">
+                        <tr>
+                            <td><xsl:value-of select="cbc:ID" /></td>
+                            <td><xsl:value-of select="cac:Item/cbc:Description" /></td>
+                            <td><xsl:value-of select="cbc:InvoicedQuantity" /> <xsl:value-of select="cbc:InvoicedQuantity/@unitCode" /></td>
+                            <td><xsl:value-of select="cac:Price/cbc:PriceAmount" /> <xsl:value-of select="cac:Price/cbc:PriceAmount/@currencyID" /></td>
+                            <td><xsl:value-of select="cbc:LineExtensionAmount" /> <xsl:value-of select="cbc:LineExtensionAmount/@currencyID" /></td>
+                        </tr>
+                    </xsl:for-each>
+                </tbody>
+            </table>
+        </div>
 
         <!-- Tax Details -->
-        <h2>Steuerdetails</h2>
-        <table>
-            <tr><th>Steuerbarer Betrag</th><td><xsl:value-of select="cac:TaxTotal/cac:TaxSubtotal/cbc:TaxableAmount" /> <xsl:value-of select="cac:TaxTotal/cac:TaxSubtotal/cbc:TaxableAmount/@currencyID" /></td></tr>
-            <tr><th>Steuerbetrag</th><td><xsl:value-of select="cac:TaxTotal/cbc:TaxAmount" /> <xsl:value-of select="cac:TaxTotal/cbc:TaxAmount/@currencyID" /></td></tr>
-            <tr><th>Steuersatz</th><td><xsl:value-of select="cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:Percent" />%</td></tr>
-        </table>
+        <div class="section">
+            <h2>Steuerdetails</h2>
+            <table>
+                <tr><th>Steuerbarer Betrag</th><td><xsl:value-of select="cac:TaxTotal/cac:TaxSubtotal/cbc:TaxableAmount" /> <xsl:value-of select="cac:TaxTotal/cac:TaxSubtotal/cbc:TaxableAmount/@currencyID" /></td></tr>
+                <tr><th>Steuerbetrag</th><td><xsl:value-of select="cac:TaxTotal/cbc:TaxAmount" /> <xsl:value-of select="cac:TaxTotal/cbc:TaxAmount/@currencyID" /></td></tr>
+                <tr><th>Steuersatz</th><td><xsl:value-of select="cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:Percent" />%</td></tr>
+            </table>
+        </div>
 
         <!-- Payment Information -->
-        <h2>Zahlungsinformationen</h2>
-        <table>
-            <tr><th>Zahlungsmittelcode</th><td><xsl:value-of select="cac:PaymentMeans/cbc:PaymentMeansCode" /></td></tr>
-            <tr><th>Zahlungsempfänger-Konto</th><td><xsl:value-of select="cac:PaymentMeans/cac:PayeeFinancialAccount/cbc:ID" /></td></tr>
-            <tr><th>Zahlungsbedingungen</th><td><xsl:value-of select="cac:PaymentTerms/cbc:Note" /></td></tr>
-        </table>
+        <div class="section">
+            <h2>Zahlungsinformationen</h2>
+            <table>
+                <tr><th>Zahlungsmittelcode</th><td><xsl:value-of select="cac:PaymentMeans/cbc:PaymentMeansCode" /></td></tr>
+                <tr><th>Zahlungsempfänger-Konto</th><td><xsl:value-of select="cac:PaymentMeans/cac:PayeeFinancialAccount/cbc:ID" /></td></tr>
+                <tr><th>Zahlungsbedingungen</th><td><xsl:value-of select="cac:PaymentTerms/cbc:Note" /></td></tr>
+            </table>
+        </div>
 
         <!-- Totals -->
-        <h2>Summen</h2>
-        <table>
-            <tr><th>Positionsbetrag</th><td><xsl:value-of select="cac:LegalMonetaryTotal/cbc:LineExtensionAmount" /> <xsl:value-of select="cac:LegalMonetaryTotal/cbc:LineExtensionAmount/@currencyID" /></td></tr>
-            <tr><th>Betrag ohne Steuern</th><td><xsl:value-of select="cac:LegalMonetaryTotal/cbc:TaxExclusiveAmount" /> <xsl:value-of select="cac:LegalMonetaryTotal/cbc:TaxExclusiveAmount/@currencyID" /></td></tr>
-            <tr><th>Betrag mit Steuern</th><td><xsl:value-of select="cac:LegalMonetaryTotal/cbc:TaxInclusiveAmount" /> <xsl:value-of select="cac:LegalMonetaryTotal/cbc:TaxInclusiveAmount/@currencyID" /></td></tr>
-            <tr><th>Zahlbarer Betrag</th><td><xsl:value-of select="cac:LegalMonetaryTotal/cbc:PayableAmount" /> <xsl:value-of select="cac:LegalMonetaryTotal/cbc:PayableAmount/@currencyID" /></td></tr>
-        </table>
+        <div class="section">
+            <h2>Summen</h2>
+            <table>
+                <tr><th>Positionsbetrag</th><td><xsl:value-of select="cac:LegalMonetaryTotal/cbc:LineExtensionAmount" /> <xsl:value-of select="cac:LegalMonetaryTotal/cbc:LineExtensionAmount/@currencyID" /></td></tr>
+                <tr><th>Betrag ohne Steuern</th><td><xsl:value-of select="cac:LegalMonetaryTotal/cbc:TaxExclusiveAmount" /> <xsl:value-of select="cac:LegalMonetaryTotal/cbc:TaxExclusiveAmount/@currencyID" /></td></tr>
+                <tr><th>Betrag mit Steuern</th><td><xsl:value-of select="cac:LegalMonetaryTotal/cbc:TaxInclusiveAmount" /> <xsl:value-of select="cac:LegalMonetaryTotal/cbc:TaxInclusiveAmount/@currencyID" /></td></tr>
+                <tr><th>Zahlbarer Betrag</th><td><xsl:value-of select="cac:LegalMonetaryTotal/cbc:PayableAmount" /> <xsl:value-of select="cac:LegalMonetaryTotal/cbc:PayableAmount/@currencyID" /></td></tr>
+            </table>
+        </div>
     </xsl:template>
 
     <!-- Cross Industry Invoice Templates -->
@@ -199,22 +270,26 @@
     </xsl:template>
 
     <xsl:template match="ram:IncludedSupplyChainTradeLineItem">
-        <h3>Einzelposten <xsl:value-of select="ram:AssociatedDocumentLineDocument/ram:LineID"/></h3>
-        <table>
-            <tr><th>Produktname</th><td><xsl:value-of select="ram:SpecifiedTradeProduct/ram:Name"/></td></tr>
-            <tr><th>Menge</th><td><xsl:value-of select="ram:SpecifiedLineTradeDelivery/ram:BilledQuantity"/></td></tr>
-            <tr><th>Stückpreis</th><td><xsl:value-of select="ram:SpecifiedLineTradeAgreement/ram:NetPriceProductTradePrice/ram:ChargeAmount"/></td></tr>
-            <tr><th>Zeilensumme</th><td><xsl:value-of select="ram:SpecifiedLineTradeSettlement/ram:SpecifiedTradeSettlementLineMonetarySummation/ram:LineTotalAmount"/></td></tr>
-        </table>
+        <div class="section">
+            <h3>Einzelposten <xsl:value-of select="ram:AssociatedDocumentLineDocument/ram:LineID"/></h3>
+            <table>
+                <tr><th>Produktname</th><td><xsl:value-of select="ram:SpecifiedTradeProduct/ram:Name"/></td></tr>
+                <tr><th>Menge</th><td><xsl:value-of select="ram:SpecifiedLineTradeDelivery/ram:BilledQuantity"/></td></tr>
+                <tr><th>Stückpreis</th><td><xsl:value-of select="ram:SpecifiedLineTradeAgreement/ram:NetPriceProductTradePrice/ram:ChargeAmount"/></td></tr>
+                <tr><th>Zeilensumme</th><td><xsl:value-of select="ram:SpecifiedLineTradeSettlement/ram:SpecifiedTradeSettlementLineMonetarySummation/ram:LineTotalAmount"/></td></tr>
+            </table>
+        </div>
     </xsl:template>
 
     <xsl:template match="ram:ApplicableHeaderTradeSettlement">
-        <table>
-            <tr><th>Zahlungsreferenz</th><td><xsl:value-of select="ram:PaymentReference"/></td></tr>
-            <tr><th>Währung</th><td><xsl:value-of select="ram:InvoiceCurrencyCode"/></td></tr>
-            <tr><th>Zahlungsbedingungen</th><td><xsl:value-of select="ram:SpecifiedTradePaymentTerms/ram:Description"/></td></tr>
-            <tr><th>Gesamtbetrag</th><td><xsl:value-of select="ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:GrandTotalAmount"/></td></tr>
-        </table>
+        <div class="section">
+            <table>
+                <tr><th>Zahlungsreferenz</th><td><xsl:value-of select="ram:PaymentReference"/></td></tr>
+                <tr><th>Währung</th><td><xsl:value-of select="ram:InvoiceCurrencyCode"/></td></tr>
+                <tr><th>Zahlungsbedingungen</th><td><xsl:value-of select="ram:SpecifiedTradePaymentTerms/ram:Description"/></td></tr>
+                <tr><th>Gesamtbetrag</th><td><xsl:value-of select="ram:SpecifiedTradeSettlementHeaderMonetarySummation/ram:GrandTotalAmount"/></td></tr>
+            </table>
+        </div>
     </xsl:template>
 
     <xsl:template match="ram:AdditionalReferencedDocument">
