@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
@@ -12,8 +13,24 @@ export class XSLTTransformerComponent {
   xmlContent: string | null = null;
   xsltContent: string | null = null;
   transformedContent: SafeHtml | null = null;
+  defaultXsltPath = 'default.xsl';
 
-  constructor(private sanitizer: DomSanitizer) {}
+  constructor(private sanitizer: DomSanitizer, private http: HttpClient) { }
+
+  ngOnInit() {
+    this.loadDefaultXslt();
+  }
+
+  loadDefaultXslt() {
+    this.http.get(this.defaultXsltPath, { responseType: 'text' }).subscribe(
+      (data) => {
+        this.xsltContent = data;
+      },
+      (error: any) => {
+        console.error('Error loading default XSLT:', error);
+      }
+    );
+  }
 
   onXmlFileSelected(event: Event) {
     const file = (event.target as HTMLInputElement).files?.[0];
@@ -34,6 +51,8 @@ export class XSLTTransformerComponent {
         this.xsltContent = e.target?.result as string;
       };
       reader.readAsText(file);
+    } else {
+      this.loadDefaultXslt();
     }
   }
 

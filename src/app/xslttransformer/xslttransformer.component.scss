@@ -1,0 +1,93 @@
+.row{
+  margin: 20px;;
+}
+
+// Serifenlose Schrift überall
+* {
+  font-family: 'Segoe UI', 'Arial', 'Helvetica', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+// Serifenlose Schrift für die gesamte Seite
+body {
+  font-family: 'Segoe UI', 'Arial', 'Helvetica', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/// Serifenlose Schrift für die gesamte Seite
+body {
+  font-family: 'Segoe UI', 'Arial', 'Helvetica', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+// Styling für input[type="file"]
+// Serifenlose Schrift für die gesamte Seite
+body {
+  font-family: 'Segoe UI', 'Arial', 'Helvetica', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+// Gemeinsames Styling für Buttons und input[type="file"]
+.button-style {
+  margin:5px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 16px;
+  background-color: #0078d4; // Fluent Primary Blue
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    background-color: #005a9e; // Darker Fluent Blue on hover
+  }
+
+  &:active {
+    background-color: #004578; // Even darker Fluent Blue when pressed
+    box-shadow: 0 0 0 3px rgba(0, 120, 212, 0.5); // Fluent active outline
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 120, 212, 0.5); // Fluent focus outline
+  }
+
+  &:disabled {
+    background-color: #f3f2f1; // Disabled background
+    color: #a6a6a6; // Disabled text color
+    cursor: not-allowed;
+  }
+}
+
+// Styling für reguläre Buttons
+button {
+  @extend .button-style;
+}
+
+// Styling für input[type="file"]
+input[type="file"] {
+  font-family: inherit;
+  font-size: 14px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  width: 80%;
+
+  &::-webkit-file-upload-button {
+    @extend .button-style;
+  }
+
+  &::file-selector-button {
+    @extend .button-style;
+  }
+}

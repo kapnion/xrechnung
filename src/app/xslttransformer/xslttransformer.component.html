@@ -1,16 +1,16 @@
 <div>
   <h2>XSLT Transformer</h2>
-  <div>
-    <label for="xmlFile">Upload XML File:</label>
+  <div class ="row">
+    <label for="xmlFile">XML Datei hochladen:</label>
     <input type="file" id="xmlFile" (change)="onXmlFileSelected($event)" accept=".xml">
   </div>
-  <div>
-    <label for="xsltFile">Upload XSLT File:</label>
+  <div class ="row">
+    <label for="xsltFile">XSL-Datei (nur, wenn nötig):</label>
     <input type="file" id="xsltFile" (change)="onXsltFileSelected($event)" accept=".xslt,.xsl">
   </div>
-  <button (click)="transform()" [disabled]="!xmlContent || !xsltContent">Transform</button>
+  <button (click)="transform()" [disabled]="!xmlContent">Umwandeln</button>
   <div>
-    <h3>Transformed Result:</h3>
+    <h3>Ergebnis</h3>
     <div [innerHTML]="transformedContent"></div>
   </div>
 </div>
