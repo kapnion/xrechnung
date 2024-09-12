@@ -69,7 +69,6 @@ export class XSLTTransformerComponent {
       const serializer = new XMLSerializer();
       const resultString = serializer.serializeToString(resultDoc);
 
-      // Sanitize the HTML to prevent XSS attacks
       this.transformedContent = this.sanitizer.bypassSecurityTrustHtml(resultString);
     }
   }
